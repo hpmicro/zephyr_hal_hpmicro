@@ -1,0 +1,43 @@
+# Copyright 2022 hpmicro
+# SPDX-License-Identifier: BSD-3-Clause
+
+function(sdk_nds_compile_options)
+   
+endfunction()
+
+function(sdk_src)
+    foreach(file ${ARGN})
+        if(IS_DIRECTORY ${file})
+            message(FATAL_ERROR "directory ${file} can't be added to sdk_lib_src")
+        endif()
+        if(IS_ABSOLUTE ${file})
+            set(path ${file})
+        else()
+            set(path ${CMAKE_CURRENT_SOURCE_DIR}/${file})
+        endif()
+        target_sources(${HPM_SDK_PROJECT_NAME} PRIVATE ${path})
+    endforeach()
+endfunction()
+
+function(sdk_inc)
+    foreach(inc ${ARGN})
+        if(IS_ABSOLUTE ${inc})
+            set(path ${inc})
+        else()
+            set(path ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+        endif()
+		message("inc_path:${path}")
+        target_include_directories(${HPM_SDK_INTERFACE_NAME} INTERFACE ${path})
+    endforeach()
+endfunction()
+
+function(sdk_sys_inc)
+    foreach(inc ${ARGN})
+        if(IS_ABSOLUTE ${inc})
+            set(path ${inc})
+        else()
+            set(path ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+        endif()
+        target_include_directories(${HPM_SDK_INTERFACE_NAME} INTERFACE ${path})
+    endforeach()
+endfunction()

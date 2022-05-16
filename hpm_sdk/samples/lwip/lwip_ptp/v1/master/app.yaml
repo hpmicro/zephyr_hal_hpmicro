@@ -1,0 +1,5 @@
+excluded_targets:
+  - debug # exclude the debug target
+  - release # exclude the release target
+dependency:
+  - ptp

@@ -1,0 +1,12 @@
+# Copyright 2022 hpmicro
+# SPDX-License-Identifier: BSD-3-Clause
+set(HPM_SDK_PROJECT_NAME ${ZEPHYR_CURRENT_LIBRARY})
+set(HPM_SDK_INTERFACE_NAME zephyr_interface)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake-ext.cmake)
+#add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/arch)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/boards)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/soc)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/drivers)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/utils)
+add_subdirectory_ifdef(CONFIG_HAS_HPMICRO_HAL hpm_sdk/components)

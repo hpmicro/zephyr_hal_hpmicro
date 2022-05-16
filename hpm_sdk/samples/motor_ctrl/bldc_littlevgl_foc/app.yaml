@@ -1,0 +1,3 @@
+dependency:
+  - motor-control
+  - lcd
