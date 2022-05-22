@@ -15,6 +15,9 @@ set(APP_BIN_NAME ${APP_NAME}.bin)
 set(APP_MAP_NAME ${APP_NAME}.map)
 set(APP_ASM_NAME ${APP_NAME}.asm)
 
+set(HPM_SDK_PROJECT_NAME hpm_sdk_lib)
+set(HPM_SDK_INTERFACE_NAME hpm_sdk_lib_itf)
+
 message(STATUS "Application: ${APP_SRC_DIR}")
 
 file(TO_CMAKE_PATH "${HPM_SDK_BASE}" PROJECT_SOURCE_DIR)
@@ -23,14 +26,14 @@ set(PROJECT_BINARY_DIR ${__build_dir})
 set(PROJECT_SOURCE_DIR ${HPM_SDK_BASE})
 
 set(BOARD_MESSAGE "Board: ${BOARD}")
-find_path(BOARD_DIR NAMES ${BOARD}.yaml PATHS ${HPM_SDK_BASE}/boards/* NO_DEFAULT_PATH)
+find_path(HPM_BOARD_DIR NAMES ${BOARD}.yaml PATHS ${HPM_SDK_BASE}/boards/* NO_DEFAULT_PATH)
 
 message(STATUS "${BOARD_MESSAGE}")
-if(NOT BOARD_DIR)
+if(NOT HPM_BOARD_DIR)
     message("No board named '${BOARD}' found")
     message(FATAL_ERROR "Invalid usage")
 endif()
-set(BOARD_DIR ${HPM_SDK_BASE}/boards/${BOARD})
+set(HPM_BOARD_DIR ${HPM_SDK_BASE}/boards/${BOARD})
 
 find_path(APP_YAML_PATH NAMES app.yaml PATHS ${APP_SRC_DIR} NO_DEFAULT_PATH)
 
@@ -66,7 +69,7 @@ if((excluded_targets) AND (NOT ${CMAKE_BUILD_TYPE} STREQUAL ""))
 endif()
 
 get_soc_name_of_board(${BOARD} soc_name)
-set(SOC ${soc_name})
+set(HPM_SOC ${soc_name})
 
 get_flash_size_of_board(${BOARD} flash_size)
 get_extram_size_of_board(${BOARD} extram_size)

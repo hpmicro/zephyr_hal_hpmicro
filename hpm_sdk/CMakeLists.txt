@@ -116,7 +116,7 @@ endif()
 sdk_sys_inc(${SYSROOT_DIR}/include)
 
 # parse module list file provided in soc folder, it will decide which modules to be enabled under drivers folder
-import_soc_modules(soc/${SOC}/soc_modules.list)
+import_soc_modules(soc/${HPM_SOC}/soc_modules.list)
 
 add_subdirectory(arch)
 add_subdirectory(boards)
@@ -137,13 +137,13 @@ if(DEFINED USE_LINKER_TEMPLATE)
    add_custom_command(
        OUTPUT ${LINKER_SCRIPT}
        DEPENDS
-       ${HPM_SDK_BASE}/soc/${SOC}/toolchains/gcc/linker.ld
+       ${HPM_SDK_BASE}/soc/${HPM_SOC}/toolchains/gcc/linker.ld
        ${linker_script_dep}
        COMMAND ${CMAKE_C_COMPILER}
        -x assembler-with-cpp
        -MD -MF ${LINKER_SCRIPT}.dep -MT ${base_name}/${LINKER_SCRIPT}
        ${all_defs}
-       -E ${HPM_SDK_BASE}/soc/${SOC}/toolchains/gcc/linker.ld
+       -E ${HPM_SDK_BASE}/soc/${HPM_SOC}/toolchains/gcc/linker.ld
        -P
        -o ${LINKER_SCRIPT}
        WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

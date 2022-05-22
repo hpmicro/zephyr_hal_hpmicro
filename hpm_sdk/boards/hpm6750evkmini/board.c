@@ -348,7 +348,7 @@ void board_init_i2c(I2C_Type *ptr)
     freq = clock_get_frequency(BOARD_CAP_I2C_CLK_NAME);
     stat = i2c_init_master(BOARD_CAP_I2C_BASE, freq, &config);
     if (stat != status_success) {
-        printf("failed to initialize i2c 0x%x\n", BOARD_CAP_I2C_BASE);
+        printf("failed to initialize i2c 0x%x\n", (uint32_t)BOARD_CAP_I2C_BASE);
         while (1) {}
     }
 }
@@ -585,7 +585,7 @@ void board_init_clock(void)
     clock_connect_group_to_cpu(0, 0);
 
     if (status_success != pllctl_init_int_pll_with_freq(HPM_PLLCTL, 0, BOARD_CPU_FREQ)) {
-        printf("Failed to set pll0_clk0 to %dHz\n", BOARD_CPU_FREQ);
+        printf("Failed to set pll0_clk0 to %ldHz\n", BOARD_CPU_FREQ);
         while(1);
     }
 

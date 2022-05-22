@@ -243,7 +243,7 @@ function (generate_ses_project)
 
     if(NOT SES_USE_TOOLCHAIN_ANDES)
         # if Andes toolchain has not been specified, it needs to use SES specific startup file
-        set(target_sources "${target_sources},${HPM_SDK_BASE}/soc/${SOC}/toolchains/segger/startup.s")
+        set(target_sources "${target_sources},${HPM_SDK_BASE}/soc/${HPM_SOC}/toolchains/segger/startup.s")
     endif()
 
     if (NOT IS_ABSOLUTE ${target_linker})
@@ -319,8 +319,8 @@ function (generate_ses_project)
         set(target_defines_escaped ${target_defines})
     endif()
 
-    set(target_register_definition "${HPM_SDK_BASE}/soc/${SOC}/hpm_ses_reg.xml")
-    set(target_cpu_register_definition "${HPM_SDK_BASE}/soc/${SOC}/hpm_ses_riscv_cpu_regs.xml")
+    set(target_register_definition "${HPM_SDK_BASE}/soc/${HPM_SOC}/hpm_ses_reg.xml")
+    set(target_cpu_register_definition "${HPM_SDK_BASE}/soc/${HPM_SOC}/hpm_ses_riscv_cpu_regs.xml")
 
     string(REPLACE "\\"  "/" target_sources_with_macro ${target_sources_with_macro})
     string(REPLACE "\\"  "/" target_include_dirs_with_macro ${target_include_dirs_with_macro})
@@ -342,7 +342,7 @@ function (generate_ses_project)
     endif()
 
     # Specify SES target device name to be defined in SES project file
-    set(SES_DEVICE_NAME "${SOC}XXXX")
+    set(SES_DEVICE_NAME "${HPM_SOC}XXXX")
     if(${OPENOCD_READY})
         file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.json
             "{
@@ -355,7 +355,7 @@ function (generate_ses_project)
                 \"link_symbols\":\"${target_link_symbols}\",
                 \"sdk_base\":\"${hpm_sdk_base_path}\",
                 \"board\":\"${BOARD}\",
-                \"soc\":\"${SOC}\",
+                \"soc\":\"${HPM_SOC}\",
                 \"openocd\":\"${OPENOCD}\",
                 \"openocd_soc\":\"${OPENOCD_SOC}\",
                 \"debug_probe\":\"${OPENOCD_PROBE}\",
@@ -390,7 +390,7 @@ function (generate_ses_project)
                 \"link_symbols\":\"${target_link_symbols}\",
                 \"sdk_base\":\"${hpm_sdk_base_path}\",
                 \"board\":\"${BOARD}\",
-                \"soc\":\"${SOC}\",
+                \"soc\":\"${HPM_SOC}\",
                 \"register_definition\":\"${target_register_definition}\",
                 \"cpu_register_definition\":\"${target_cpu_register_definition}\",
                 \"post_build_command\":\"${post_build_command}\",
