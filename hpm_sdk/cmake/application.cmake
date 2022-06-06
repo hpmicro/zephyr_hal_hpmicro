@@ -17,6 +17,7 @@ set(APP_ASM_NAME ${APP_NAME}.asm)
 
 set(HPM_SDK_PROJECT_NAME hpm_sdk_lib)
 set(HPM_SDK_INTERFACE_NAME hpm_sdk_lib_itf)
+set(HPM_SDK_TARGET_SCOPE "public")
 
 message(STATUS "Application: ${APP_SRC_DIR}")
 
