@@ -6,12 +6,13 @@ sdk_inc(toolchains)
 if(NOT DEFINED USE_CUSTOM_STARTUP)
 sdk_src(toolchains/gcc/start.S)
 endif()
-
+if(NOT DEFINED ADAPTED_ZEPHYR)
 sdk_src(
     toolchains/reset.c
     toolchains/trap.c
     system.c
 )
+endif()
 
 # soc drivers
 sdk_src (
