@@ -14,5 +14,3 @@ sdk_compile_definitions(BOARD_RUNNING_CORE=HPM_CORE1)
 endif()
 
 sdk_inc(.)
-sdk_src(pinmux.c)
-sdk_src(board.c)
