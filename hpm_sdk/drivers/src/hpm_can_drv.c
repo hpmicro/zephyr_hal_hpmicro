@@ -714,7 +714,7 @@ hpm_stat_t can_init(CAN_Type *base, can_config_t *config, uint32_t src_clk_freq)
         can_reset(base, false);
 
         /* Set CAN work mode */
-        can_set_mode(base, config->mode);
+        can_set_node_mode(base, config->mode);
 
         /* Configure TX Buffer priority mode */
         can_select_tx_buffer_priority_mode(base, config->enable_tx_buffer_priority_mode);
