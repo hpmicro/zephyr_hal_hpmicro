@@ -7,7 +7,7 @@
 
 #include "hpm_dma_drv.h"
 
-hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_t *ch)
+hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_t *ch, bool transfer)
 {
     uint32_t tmp;
     if ((ch->dst_width > DMA_SOC_TRANSFER_WIDTH_MAX(ptr))
@@ -48,12 +48,12 @@ hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_
         | DMA_CHCTRL_CTRL_DSTADDRCTRL_SET(ch->dst_addr_ctrl)
         | DMA_CHCTRL_CTRL_SRCREQSEL_SET(ch_num)
         | DMA_CHCTRL_CTRL_DSTREQSEL_SET(ch_num)
-        | ch->interrupt_mask
-        | DMA_CHCTRL_CTRL_ENABLE_MASK;
-    ptr->CHCTRL[ch_num].CTRL = tmp;
-    if ((ptr->CHEN == 0) || !(ptr->CHEN & 1 << ch_num)) {
-        return status_fail;
+        | ch->interrupt_mask;
+
+    if (transfer) {
+        tmp |= DMA_CHCTRL_CTRL_ENABLE_MASK;
     }
+    ptr->CHCTRL[ch_num].CTRL = tmp;
 
     return status_success;
 }
@@ -68,7 +68,7 @@ void dma_default_channel_config(DMA_Type *ptr, dma_channel_config_t *ch)
     ch->src_addr_ctrl = DMA_ADDRESS_CONTROL_INCREMENT;
     ch->dst_addr_ctrl = DMA_ADDRESS_CONTROL_INCREMENT;
     ch->interrupt_mask = DMA_INTERRUPT_MASK_NONE;
-    ch->linked_ptr= 0;
+    ch->linked_ptr = 0;
 #if DMA_SUPPORT_64BIT_ADDR
     ch->linked_ptr_high = 0;
 #endif
@@ -130,7 +130,7 @@ hpm_stat_t dma_start_memcpy(DMA_Type *ptr, uint8_t ch_num,
     config.size_in_byte = size;
 
     config.src_burst_size = burst_size;
-    stat = dma_setup_channel(ptr, ch_num, &config);
+    stat = dma_setup_channel(ptr, ch_num, &config, true);
     if (stat != status_success) {
         return stat;
     }
@@ -138,7 +138,7 @@ hpm_stat_t dma_start_memcpy(DMA_Type *ptr, uint8_t ch_num,
     return stat;
 }
 
-hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig)
+hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig, bool transfer)
 {
     hpm_stat_t stat = status_success;
     dma_channel_config_t config = {0};
@@ -163,9 +163,9 @@ hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig)
     config.src_addr = pconfig->src;
     config.dst_addr = pconfig->dst;
     config.size_in_byte = pconfig->size_in_byte;
-     /*  In DMA handshake case, source burst size must be 1 transfer, that is 0. */
+    /*  In DMA handshake case, source burst size must be 1 transfer, that is 0. */
     config.src_burst_size = 0;
-    stat = dma_setup_channel(ptr, pconfig->ch_index, &config);
+    stat = dma_setup_channel(ptr, pconfig->ch_index, &config, transfer);
     if (stat != status_success) {
         return stat;
     }

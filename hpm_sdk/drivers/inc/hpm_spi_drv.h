@@ -17,6 +17,14 @@
  */
 
 /**
+ * @brief spi dma enable
+ */
+typedef enum {
+    spi_tx_dma_enable = SPI_CTRL_TXDMAEN_MASK,
+    spi_rx_dma_enable = SPI_CTRL_RXDMAEN_MASK
+} spi_dma_enable_t;
+
+/**
  * @brief spi mode selection
  */
 typedef enum {
@@ -190,6 +198,8 @@ typedef struct {
  * @brief spi common transfer control config structure
  */
 typedef struct {
+    bool tx_dma_enable;
+    bool rx_dma_enable;
     uint8_t trans_mode;
     uint8_t data_phase_fmt;
     uint8_t dummy_cnt;
@@ -271,11 +281,71 @@ void spi_format_init(SPI_Type *ptr, spi_format_config_t *config);
  * @param [in] wsize spi sent data size in byte
  * @param [in] rbuff spi receive data buff address
  * @param [in] rsize spi receive data size
+ * @retval hpm_stat_t status_success if spi transfer without any error
  */
 hpm_stat_t spi_transfer(SPI_Type *ptr,
                         spi_control_config_t *config,
                         uint8_t *cmd, uint32_t *addr,
                         uint8_t *wbuff, uint32_t wsize,  uint8_t *rbuff, uint32_t rsize);
+
+/**
+ * @brief spi setup dma transfer
+ *
+ * @param [in] ptr SPI base address
+ * @param [in] config spi_control_config_t
+ * @param [in] cmd spi transfer mode
+ * @param [in] addr spi transfer target address
+ * @param [in] wsize spi sent data size in byte
+ * @param [in] rsize spi receive data size
+ * @retval hpm_stat_t status_success if spi setup dma transfer without any error
+ */
+hpm_stat_t spi_setup_dma_transfer(SPI_Type *ptr,
+                        spi_control_config_t *config,
+                        uint8_t *cmd, uint32_t *addr,
+                        uint32_t wsize, uint32_t rsize);
+
+/**
+ * @brief spi wait for idle status
+ *
+ * @param [in] ptr SPI base address
+ * @retval hpm_stat_t status_success if spi in idle status
+ */
+hpm_stat_t spi_wait_for_idle_status(SPI_Type *ptr);
+
+/**
+ * @brief spi wait for busy status
+ *
+ * @param [in] ptr SPI base address
+ * @retval hpm_stat_t status_success if spi in busy status
+ */
+hpm_stat_t spi_wait_for_busy_status(SPI_Type *ptr);
+
+/**
+ * @brief Enables the SPI DMA request.
+ *
+ * This function configures the Rx and Tx DMA mask of the SPI. The parameters are base and a DMA mask.
+ *
+ * @param base SPI base address.
+ * @param mask The interrupt mask; Use the spi_dma_enable_t.
+ */
+static inline void spi_enable_dma(SPI_Type *ptr, uint32_t mask)
+{
+    ptr->CTRL |= mask;
+}
+
+/*!
+ * @brief Disables the SPI DMA request.
+ *
+ * This function configures the Rx and Tx DMA mask of the SPI.  The parameters are base and a DMA mask.
+ *
+ * @param base SPI base address.
+ * @param mask The interrupt mask; Use the spi_dma_enable_t.
+ */
+static inline void spi_disable_dma(SPI_Type *ptr, uint32_t mask)
+{
+    ptr->CTRL &= ~mask;
+}
+
 
 /**
  * @}
