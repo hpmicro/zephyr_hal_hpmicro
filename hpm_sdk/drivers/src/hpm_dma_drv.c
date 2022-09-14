@@ -7,7 +7,7 @@
 
 #include "hpm_dma_drv.h"
 
-hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_t *ch, bool transfer)
+hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_t *ch, bool start_transfer)
 {
     uint32_t tmp;
     if ((ch->dst_width > DMA_SOC_TRANSFER_WIDTH_MAX(ptr))
@@ -16,11 +16,8 @@ hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_
     }
     if ((ch->size_in_byte & ((1 << ch->dst_width) - 1))
      || (ch->src_addr & ((1 << ch->src_width) - 1))
-     || (ch->src_addr & (((1 << ch->src_width) << ch->src_burst_size) - 1))
      || (ch->dst_addr & ((1 << ch->dst_width) - 1))
-     || (ch->dst_addr & (((1 << ch->dst_width) << ch->src_burst_size) - 1))
      || ((1 << ch->src_width) & ((1 << ch->dst_width) - 1))
-     || (((1 << ch->src_width) << ch->src_burst_size) & ((1 << ch->dst_width) - 1))
      || ((ch->linked_ptr & 0x7))) {
         return status_dma_alignment_error;
     }
@@ -50,7 +47,7 @@ hpm_stat_t dma_setup_channel(DMA_Type *ptr, uint32_t ch_num, dma_channel_config_
         | DMA_CHCTRL_CTRL_DSTREQSEL_SET(ch_num)
         | ch->interrupt_mask;
 
-    if (transfer) {
+    if (start_transfer) {
         tmp |= DMA_CHCTRL_CTRL_ENABLE_MASK;
     }
     ptr->CHCTRL[ch_num].CTRL = tmp;
@@ -138,7 +135,7 @@ hpm_stat_t dma_start_memcpy(DMA_Type *ptr, uint8_t ch_num,
     return stat;
 }
 
-hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig, bool transfer)
+hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig, bool start_transfer)
 {
     hpm_stat_t stat = status_success;
     dma_channel_config_t config = {0};
@@ -165,7 +162,7 @@ hpm_stat_t dma_setup_handshake(DMA_Type *ptr,  dma_handshake_config_t *pconfig, 
     config.size_in_byte = pconfig->size_in_byte;
     /*  In DMA handshake case, source burst size must be 1 transfer, that is 0. */
     config.src_burst_size = 0;
-    stat = dma_setup_channel(ptr, pconfig->ch_index, &config, transfer);
+    stat = dma_setup_channel(ptr, pconfig->ch_index, &config, start_transfer);
     if (stat != status_success) {
         return stat;
     }
