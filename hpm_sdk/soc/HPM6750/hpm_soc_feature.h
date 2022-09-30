@@ -162,4 +162,145 @@
  */
 #define SDXC_SOC_MAX_COUNT      (2)
 
+/**
+ * @brief Hpmicro clock src exist
+ * 
+ */
+#define HPM_CLK_HAS_SRC_OSC24M        1
+#define HPM_CLK_HAS_SRC_PLL0_CLK0        1
+#define HPM_CLK_HAS_SRC_PLL1_CLK0        1
+#define HPM_CLK_HAS_SRC_PLL1_CLK1        1
+#define HPM_CLK_HAS_SRC_PLL2_CLK0        1
+#define HPM_CLK_HAS_SRC_PLL2_CLK1        1
+#define HPM_CLK_HAS_SRC_PLL3_CLK0        1
+#define HPM_CLK_HAS_SRC_PLL4_CLK0        1
+#define HPM_CLK_HAS_SRC_OSC32K        1
+#define HPM_CLK_HAS_ADC_SRC_AHB0        1
+#define HPM_CLK_HAS_ADC_SRC_ANA0        1
+#define HPM_CLK_HAS_ADC_SRC_ANA1        1
+#define HPM_CLK_HAS_ADC_SRC_ANA2        1
+#define HPM_CLK_HAS_I2S_SRC_AHB0        1
+#define HPM_CLK_HAS_I2S_SRC_AUD0        1
+#define HPM_CLK_HAS_I2S_SRC_AUD1        1
+#define HPM_CLK_HAS_I2S_SRC_AUD2        1
+
+/**
+ * @brief Hpmicro clock name exist
+ * 
+ */
+#define HPM_CLOCK_HAS_CPU0        1
+#define HPM_CLOCK_HAS_CPU1        1
+#define HPM_CLOCK_HAS_MCHTMR0        1
+#define HPM_CLOCK_HAS_MCHTMR1        1
+#define HPM_CLOCK_HAS_AXI0        1
+#define HPM_CLOCK_HAS_AXI1        1
+#define HPM_CLOCK_HAS_AXI2        1
+#define HPM_CLOCK_HAS_AHB        1
+#define HPM_CLOCK_HAS_DRAM        1
+#define HPM_CLOCK_HAS_XPI0        1
+#define HPM_CLOCK_HAS_XPI1        1
+#define HPM_CLOCK_HAS_GPTMR0        1
+#define HPM_CLOCK_HAS_GPTMR1        1
+#define HPM_CLOCK_HAS_GPTMR2        1
+#define HPM_CLOCK_HAS_GPTMR3        1
+#define HPM_CLOCK_HAS_GPTMR4        1
+#define HPM_CLOCK_HAS_GPTMR5        1
+#define HPM_CLOCK_HAS_GPTMR6        1
+#define HPM_CLOCK_HAS_GPTMR7        1
+#define HPM_CLOCK_HAS_UART0        1
+#define HPM_CLOCK_HAS_UART1        1
+#define HPM_CLOCK_HAS_UART2        1
+#define HPM_CLOCK_HAS_UART3        1
+#define HPM_CLOCK_HAS_UART4        1
+#define HPM_CLOCK_HAS_UART5        1
+#define HPM_CLOCK_HAS_UART6        1
+#define HPM_CLOCK_HAS_UART7        1
+#define HPM_CLOCK_HAS_UART8        1
+#define HPM_CLOCK_HAS_UART9        1
+#define HPM_CLOCK_HAS_UART10        1
+#define HPM_CLOCK_HAS_UART11        1
+#define HPM_CLOCK_HAS_UART12        1
+#define HPM_CLOCK_HAS_UART13        1
+#define HPM_CLOCK_HAS_UART14        1
+#define HPM_CLOCK_HAS_UART15        1
+#define HPM_CLOCK_HAS_I2C0        1
+#define HPM_CLOCK_HAS_I2C1        1
+#define HPM_CLOCK_HAS_I2C2        1
+#define HPM_CLOCK_HAS_I2C3        1
+#define HPM_CLOCK_HAS_SPI0        1
+#define HPM_CLOCK_HAS_SPI1        1
+#define HPM_CLOCK_HAS_SPI2        1
+#define HPM_CLOCK_HAS_SPI3        1
+#define HPM_CLOCK_HAS_CAN0        1
+#define HPM_CLOCK_HAS_CAN1        1
+#define HPM_CLOCK_HAS_CAN2        1
+#define HPM_CLOCK_HAS_CAN3        1
+#define HPM_CLOCK_HAS_DISPLAY        1
+#define HPM_CLOCK_HAS_SDXC0        1
+#define HPM_CLOCK_HAS_SDXC1        1
+#define HPM_CLOCK_HAS_CAMERA0        1
+#define HPM_CLOCK_HAS_CAMERA1        1
+#define HPM_CLOCK_HAS_NTMR0        1
+#define HPM_CLOCK_HAS_NTMR1        1
+#define HPM_CLOCK_HAS_PTPC        1
+#define HPM_CLOCK_HAS_REF0        1
+#define HPM_CLOCK_HAS_REF1        1
+#define HPM_CLOCK_HAS_WATCHDOG0        1
+#define HPM_CLOCK_HAS_WATCHDOG1        1
+#define HPM_CLOCK_HAS_WATCHDOG2        1
+#define HPM_CLOCK_HAS_WATCHDOG3        1
+#define HPM_CLOCK_HAS_PUART        1
+#define HPM_CLOCK_HAS_PWDG        1
+#define HPM_CLOCK_HAS_ETH0        1
+#define HPM_CLOCK_HAS_ETH1        1
+#define HPM_CLOCK_HAS_PTP0        1
+#define HPM_CLOCK_HAS_PTP1        1
+#define HPM_CLOCK_HAS_SDP        1
+#define HPM_CLOCK_HAS_XDMA        1
+#define HPM_CLOCK_HAS_ROM        1
+#define HPM_CLOCK_HAS_RAM0        1
+#define HPM_CLOCK_HAS_RAM1        1
+#define HPM_CLOCK_HAS_USB0        1
+#define HPM_CLOCK_HAS_USB1        1
+#define HPM_CLOCK_HAS_JPEG        1
+#define HPM_CLOCK_HAS_PDMA        1
+#define HPM_CLOCK_HAS_KMAN        1
+#define HPM_CLOCK_HAS_GPIO        1
+#define HPM_CLOCK_HAS_MBX0        1
+#define HPM_CLOCK_HAS_MBX1        1
+#define HPM_CLOCK_HAS_HDMA        1
+#define HPM_CLOCK_HAS_RNG        1
+#define HPM_CLOCK_HAS_MOT0        1
+#define HPM_CLOCK_HAS_MOT1        1
+#define HPM_CLOCK_HAS_MOT2        1
+#define HPM_CLOCK_HAS_MOT3        1
+#define HPM_CLOCK_HAS_ACMP        1
+#define HPM_CLOCK_HAS_PDM        1
+#define HPM_CLOCK_HAS_DAO        1
+#define HPM_CLOCK_HAS_MSYN        1
+#define HPM_CLOCK_HAS_LMM0        1
+#define HPM_CLOCK_HAS_LMM1        1
+#define HPM_CLOCK_HAS_ANA0        1
+#define HPM_CLOCK_HAS_ANA1        1
+#define HPM_CLOCK_HAS_ANA2        1
+#define HPM_CLOCK_HAS_ADC0        1
+#define HPM_CLOCK_HAS_ADC1        1
+#define HPM_CLOCK_HAS_ADC2        1
+#define HPM_CLOCK_HAS_ADC3        1
+#define HPM_CLOCK_HAS_AUD0        1
+#define HPM_CLOCK_HAS_AUD1        1
+#define HPM_CLOCK_HAS_AUD2        1
+#define HPM_CLOCK_HAS_I2S0        1
+#define HPM_CLOCK_HAS_I2S1        1
+#define HPM_CLOCK_HAS_I2S2        1
+#define HPM_CLOCK_HAS_I2S3        1
+#define HPM_CLOCK_HAS_OSC0CLK0        1
+#define HPM_CLOCK_HAS_PLL0CLK0        1
+#define HPM_CLOCK_HAS_PLL1CLK0        1
+#define HPM_CLOCK_HAS_PLL1CLK1        1
+#define HPM_CLOCK_HAS_PLL2CLK0        1
+#define HPM_CLOCK_HAS_PLL2CLK1        1
+#define HPM_CLOCK_HAS_PLL3CLK0        1
+#define HPM_CLOCK_HAS_PLL4CLK0        1
+
 #endif /* HPM_SOC_FEATURE_H */
