@@ -7,7 +7,6 @@
 
 #ifndef HPM_INTERRUPT_H
 #define HPM_INTERRUPT_H
-#include "riscv/riscv_core.h"
 #include "hpm_common.h"
 #include "hpm_plic_drv.h"
 

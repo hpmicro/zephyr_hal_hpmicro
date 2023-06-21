@@ -118,13 +118,8 @@ sdk_sys_inc(${SYSROOT_DIR}/include)
 # parse module list file provided in soc folder, it will decide which modules to be enabled under drivers folder
 import_soc_modules(soc/${HPM_SOC}/soc_modules.list)
 
-add_subdirectory(arch)
-add_subdirectory(boards)
 add_subdirectory(soc)
 add_subdirectory(drivers)
-add_subdirectory(utils)
-add_subdirectory(components)
-add_subdirectory(middleware)
 
 if(DEFINED USE_LINKER_TEMPLATE)
    set(linker_script_dep DEPFILE ${PROJECT_BINARY_DIR}/${LINKER_SCRIPT}.dep)

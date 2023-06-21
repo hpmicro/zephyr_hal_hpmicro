@@ -840,7 +840,7 @@
 #define HPM_MONO ((MONO_Type *) HPM_MONO_BASE)
 
 
-#include "riscv/riscv_core.h"
+#include "hpm_common.h"
 #include "hpm_csr_regs.h"
 #include "hpm_interrupt.h"
 #include "hpm_misc.h"

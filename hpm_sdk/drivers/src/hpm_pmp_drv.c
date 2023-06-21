@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  *
  */
-#include "riscv/riscv_core.h"
+#include "hpm_common.h"
 #include "hpm_pmp_drv.h"
 #include "hpm_csr_regs.h"
 
